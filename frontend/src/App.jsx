@@ -23,10 +23,10 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">Digital Land Exchange</div>
+      <div className="logo">Real estate and Rental system</div>
       <div className="nav-links">
         <Link to="/">Home</Link>
-        <Link to="/seller-form">Sell Land</Link>
+        <Link to="/seller-form">Sell</Link>
         <Link to="/rent-form">Rent</Link>
 
         {!loggedIn ? (

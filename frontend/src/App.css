@@ -1,0 +1,560 @@
+/* === GLOBAL STYLES (React Fullscreen Fix) === */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #fdfbfb);
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* ===========================
+   NAVBAR STYLES
+=========================== */
+.navbar {
+  width: 100%;
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d4faff;
+}
+
+.logout-btn {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  background: #00ffd0;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive Navbar Fix */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .logout-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+
+/* ===========================
+   HOME PAGE
+=========================== */
+.home {
+  padding: 2rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  font-weight: 700;
+}
+
+.hero p {
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Land Section */
+.land-list {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.land-list h2 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.cards {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 0.8rem 0 0.5rem;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.card p {
+  color: #444;
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.card button {
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 208, 0.3);
+}
+
+/* Responsive Cards */
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================
+   LOGIN PAGE (Fullscreen Centered)
+=========================== */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #e3f2fd, #fdfbfb);
+}
+
+.auth-container {
+  background: #ffffff;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  text-align: center;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.app-header {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 1.5rem;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f8f8f8;
+  color: #000; /* TEXT COLOR FIX */
+  font-size: 1rem;
+}
+
+.auth-container input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #007bff;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 208, 0.4);
+}
+
+/* ===========================
+   RENT FORM
+=========================== */
+.form-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #007bff, #00ffd0);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.form-section h1 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.land-form {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.land-form input,
+.land-form select,
+.land-form textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #000; /* TEXT COLOR FIX */
+}
+
+.land-form input:focus,
+.land-form select:focus,
+.land-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+.land-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.land-form button {
+  background: linear-gradient(135deg, #007bff, #00ffd0);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.land-form button:hover {
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  transform: translateY(-2px);
+}
+
+.footer {
+  text-align: center;
+  color: white;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   SELLER FORM
+=========================== */
+.seller-form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #007bff, #00ffd0);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.seller-form h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.seller-form form {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.seller-form input,
+.seller-form select,
+.seller-form textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #000; /* TEXT COLOR FIX */
+}
+
+.seller-form input:focus,
+.seller-form select:focus,
+.seller-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+.seller-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.seller-form button {
+  background: linear-gradient(135deg, #007bff, #00ffd0);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.seller-form button:hover {
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  transform: translateY(-2px);
+}
+
+/* Footer styling */
+.seller-form .footer {
+  text-align: center;
+  color: white;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .land-form,
+  .seller-form form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+/* ===========================
+   RENT FORM (Exact as Seller Form)
+=========================== */
+.rent-form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #007bff, #00ffd0); /* Aqua blue background outside box */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.rent-form h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rent-form form {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.rent-form input,
+.rent-form select,
+.rent-form textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #000; /* TEXT COLOR FIX */
+}
+
+.rent-form input:focus,
+.rent-form select:focus,
+.rent-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+.rent-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+/* ===== Button styling ===== */
+.rent-form button {
+  background: linear-gradient(135deg, #007bff, #00ffd0);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rent-form button:hover {
+  background: linear-gradient(135deg, #00ffd0, #007bff);
+  transform: translateY(-2px);
+}
+
+/* ===== Footer ===== */
+.rent-form .footer {
+  text-align: center;
+  color: white;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .rent-form form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}

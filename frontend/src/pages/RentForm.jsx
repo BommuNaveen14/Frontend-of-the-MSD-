@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_URL;  // ✅ Vite-compatible
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000"; // ✅ fallback
 
 function RentForm() {
   const [formData, setFormData] = useState({
@@ -15,24 +15,31 @@ function RentForm() {
     email: "",
   });
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+  // ✅ Update input values
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // ✅ Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      // prepare form data
       const data = new FormData();
       Object.entries(formData).forEach(([key, value]) =>
         data.append(key, value)
       );
       if (image) data.append("image", image);
 
-      // For now, just simulate success (no rent backend yet)
-      // You can later change to:
-      // await axios.post(`${API}/api/rents`, data, { headers: { "Content-Type": "multipart/form-data" } });
-      alert("Rent listing uploaded successfully!");
+      // ✅ Actual API call to backend
+      await axios.post(`${API}/api/rents`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      alert("✅ Rent listing uploaded successfully!");
+      // Reset form after submission
       setFormData({
         title: "",
         location: "",
@@ -46,16 +53,34 @@ function RentForm() {
       setImage(null);
     } catch (err) {
       console.error("Error uploading rent listing:", err);
-      alert("Upload failed. Please try again.");
+      alert("❌ Upload failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className="rent-form-container" style={{ padding: "2rem" }}>
+      <section
+        className="form-section"
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          background: "#f9f9f9",
+          padding: "2rem",
+          borderRadius: "10px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+        }}
+      >
+        <h1 style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+          Upload Rent Listing
+        </h1>
 
-      <section className="form-section">
-        <h1>Upload Rent Listing</h1>
-        <form onSubmit={handleSubmit} className="land-form" encType="multipart/form-data">
+        <form
+          onSubmit={handleSubmit}
+          className="land-form"
+          encType="multipart/form-data"
+        >
           <label htmlFor="title">Property Title</label>
           <input
             type="text"
@@ -151,11 +176,30 @@ function RentForm() {
             onChange={(e) => setImage(e.target.files[0])}
           />
 
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              background: "#4CAF50",
+              color: "white",
+              border: "none",
+              padding: "0.7rem 1.2rem",
+              borderRadius: "6px",
+              cursor: "pointer",
+              marginTop: "1rem",
+              width: "100%",
+              fontSize: "1rem",
+            }}
+          >
+            {loading ? "Uploading..." : "Submit"}
+          </button>
         </form>
       </section>
 
-      <footer className="footer">
+      <footer
+        className="footer"
+        style={{ textAlign: "center", marginTop: "2rem", color: "#777" }}
+      >
         © 2025 Digital Land Exchange. All rights reserved.
       </footer>
     </div>

@@ -6,6 +6,7 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function SellerForm() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     location: "",
@@ -13,6 +14,7 @@ function SellerForm() {
     size: "",
     sizeValue: "",
     description: "",
+    email: "", // ✅ Added seller email field
     image: null,
   });
 
@@ -33,7 +35,7 @@ function SellerForm() {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+          Authorization: token ? `Bearer ${token}` : "",
         },
       };
 
@@ -45,11 +47,11 @@ function SellerForm() {
       const res = await axios.post(`${API}/api/lands`, data, config);
 
       if (res.status === 201) {
-        alert("Land added successfully!");
-        navigate("/"); // ✅ redirect to home after submit
+        alert("✅ Land added successfully!");
+        navigate("/"); // Redirect to home
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("❌ Error submitting form:", error);
       alert("Failed to add land. Please check console for details.");
     }
   };
@@ -102,6 +104,17 @@ function SellerForm() {
           value={formData.description}
           onChange={handleChange}
         />
+        
+        {/* ✅ Added seller email input */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Seller Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+
         <input type="file" name="image" onChange={handleImageChange} />
         <button type="submit">Submit</button>
       </form>
